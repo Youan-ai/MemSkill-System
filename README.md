@@ -1,53 +1,23 @@
-# MemSkill System
+# MemSkill-System
 
-> 元记忆技能系统 — Skill-Content解耦 · Double-Embedding检索 · Top-K动态选择 · 失败案例驱动演化
+Memory skill system with dual-embedding strategy (retrieval + state encoding). Dynamic Top-K selection from 20+ memory skills. Self-evolving through failure pattern detection.
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+## Features
+- Skill-Content separation architecture
+- Top-K dynamic memory strategy selection
+- Double embedding strategy: retrieval + state encoding
+- Auto evolution from failure cases
 
-## 核心理念
-
-**"技能不是内容，技能是怎么记"** — 元记忆系统将"记忆技能"（如何记）与"记忆内容"（记什么）分离，
-实现记忆策略的自主演化和自动优化。
-
-## 架构
-
-```
-┌─────────────────────────────────────────┐
-│            Double-Embedding              │
-│  ┌─────────────┐  ┌──────────────────┐  │
-│  │ 检索嵌入     │  │ 状态编码嵌入      │  │
-│  │ (语义搜索)   │  │ (上下文编码)     │  │
-│  └─────────────┘  └──────────────────┘  │
-└─────────────────────────────────────────┘
-                     │
-┌─────────────────────────────────────────┐
-│            Top-K 动态选择 (K=3)          │
-│  基于上下文自动选择最优记忆技能组合       │
-└─────────────────────────────────────────┘
-                     │
-┌─────────────────────────────────────────┐
-│         失败案例驱动演化 (Designer)       │
-│  监控失败模式 → 自动生成/精炼记忆策略     │
-└─────────────────────────────────────────┘
-```
-
-## 特性
-
-- **Skill-Content解耦** — 记忆技能与记忆内容分离管理
-- **Double-Embedding** — 检索嵌入 + 状态编码嵌入并行
-- **Top-K 动态选择** — 基于上下文的K=3个最优技能组合
-- **失败驱动演化** — Designer监控失败模式，自动精炼策略
-- **20+技能槽** — 支持多样化的记忆策略
-
-## 安装
-
+## Installation
 ```bash
-git clone https://github.com/Youan-ai/MemSkill-System.git
-cd MemSkill-System
-pip install -e .
+pip install memskill
 ```
 
-## 许可证
+## Quick Start
+```python
+from memskill import MemoryBank
 
-MIT License
+bank = MemoryBank(capacity=5000)
+bank.add_item("key", "value")
+skill = bank.select_skill(context)
+```
